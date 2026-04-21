@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Ajouter un Stageaire</h1>
-    <form action="donnée.php" method="post">
+    <form action="donnée.php" method="POST" enctype="multipart/form-data">
         <fieldset>
         <label for="nom">Nom : </label>
         <input type="text" placeholder="votre nom" required name="nom"> <br> <br>
@@ -21,6 +21,8 @@
         <input type="text" placeholder="votre CIN" required name="cin"> <br><br>
         <label for="nom">Telephone: </label>
         <input type="tel" placeholder="votre telephone" required name="tele"> <br><br>
+        <label>Votre image : </label>
+        <input type="file" name="img" id="img" required accept="image/*" >
         <button type="submit">Ajouter</button>
         </fieldset>
     </form>
