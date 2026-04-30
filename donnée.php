@@ -2,7 +2,7 @@
 if (!isset($_POST["nom"], $_POST["prenom"], $_POST["date"], $_POST["ville"], $_POST["cin"], $_POST["tele"])) {
     header("location:index.php?msg=valeur invalid");
     exit();
-} else {
+} 
     $dateAct = new DateTime();
     $dateN = new DateTime($_POST["date"]);
     $age = $dateAct->diff($dateN);
@@ -22,7 +22,7 @@ if (!isset($_POST["nom"], $_POST["prenom"], $_POST["date"], $_POST["ville"], $_P
     }
     $ext  = ['image/jpeg' => '.jpg', 'image/png' => '.png', 'image/gif' => '.gif'];
     $nomImage = uniqid() . $ext[$mime];
-    $dest = __DIR__ . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . $nomImage;
+    $dest = __DIR__ . "/" . 'images' . "/" . $nomImage;
     move_uploaded_file($_FILES['img']['tmp_name'], $dest);
     $nomImage = "<img src='images/{$nomImage}' width='50px '>";
     $string = $_POST["nom"] . ";" . $_POST["prenom"] . ";" . $_POST["date"] . ";" . $age . ";" . $_POST["ville"] . ";" . $_POST["cin"] . ";" . $_POST["tele"] . ";" . $nomImage . "\n";
@@ -44,6 +44,7 @@ if (!isset($_POST["nom"], $_POST["prenom"], $_POST["date"], $_POST["ville"], $_P
     <td>cin</td>
     <td>tele</td>
     <td>image</td>
+     <td>action</td>
     </tr>";
     foreach ($new as  $value) {
         if (!empty($value)) {
@@ -52,10 +53,11 @@ if (!isset($_POST["nom"], $_POST["prenom"], $_POST["date"], $_POST["ville"], $_P
             foreach ($l as  $v) {
                 echo "<td>{$v}</td>";
             }
+                echo "<td><a href='supprimer.php?cin={$l[5]}' style='color:red; text-decoration:none;'>Supprimer</a><a href='modifier.php?cin={$l[5]}' style='color:blue; text-decoration:none;'>Modifier</a></td>";
             echo "</tr>";
         }
     }
-}
+
 echo "</table>";
 echo "</div>";
 echo "
@@ -89,7 +91,7 @@ table {
 }
 
 th, td {
-    padding: 10px;
+    padding: 5px;
     text-align: center;
 }
 
